@@ -4,15 +4,15 @@
 namespace uTOF {
 
   Channel::Channel() :
-    TObject(), mIndex(-1), mHits()
+    mIndex(-1), mHits()
   {}
 
   Channel::Channel(int aIndex) :
-    TObject(), mIndex(aIndex), mHits()
+    mIndex(aIndex), mHits()
   {}
 
   Channel::Channel(const Channel &rhs) :
-    TObject(rhs), mIndex(rhs.mIndex), mHits(rhs.mHits)
+    mIndex(rhs.mIndex), mHits(rhs.mHits)
   {}
 
   Channel::~Channel()
@@ -24,7 +24,6 @@ namespace uTOF {
   Channel::operator=(const Channel &rhs)
   {
     if (&rhs == this) return *this;
-    TObject::operator=(rhs);
     mIndex = rhs.mIndex;
     mHits  = rhs.mHits;
     return *this;

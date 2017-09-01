@@ -1,7 +1,6 @@
 #ifndef uTOF_Channel_H
 #define uTOF_Channel_H
 
-#include "TObject.h"
 #include <vector>
 
 namespace uTOF {
@@ -9,7 +8,7 @@ namespace uTOF {
   class Hit;
   typedef std::vector<Hit *> HitArray;
 
-  class Channel : public TObject {
+  class Channel {
     
   public:
     
@@ -25,7 +24,7 @@ namespace uTOF {
     Channel &operator=(const Channel &rhs);
 
     /** accessors **/
-    Int_t      getIndex()         const {return mIndex;};
+    int        getIndex()       const {return mIndex;};
     const Hit *getHit(int iHit) const {return iHit < mHits.size() ? mHits.at(iHit) : NULL;};
 
     /** modifiers **/
@@ -35,11 +34,9 @@ namespace uTOF {
   private:
     
     /** members **/ 
-    int      mIndex;
+    int      mIndex; //!
     HitArray mHits;
     
-    ClassDef(Channel, 1);
-
   };
   
 } /** namespace uTOF **/
