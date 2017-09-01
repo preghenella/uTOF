@@ -6,6 +6,7 @@
 
 #pragma link C++ class uTOF::Hit+;
 #pragma link C++ class uTOF::Channel+;
+#pragma link C++ class uTOF::Writer+;
 #pragma link C++ class std::vector<uTOF::Hit *>+;
 
 #endif
