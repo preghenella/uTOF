@@ -25,7 +25,7 @@ namespace uTOF {
 
     /** accessors **/
     int        getIndex()       const {return mIndex;};
-    const Hit *getHit(int iHit) const {return iHit < mHits.size() ? mHits.at(iHit) : NULL;};
+    const Hit *getHit(int iHit) const {return iHit < mHits.size() ? mHits.at(iHit) : nullptr;};
 
     /** modifiers **/
     void AddHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW);
