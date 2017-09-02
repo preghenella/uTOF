@@ -17,6 +17,8 @@ namespace uTOF {
 
   Channel::~Channel()
   {
+    for (auto &aHit : mHits)
+      delete aHit;
     mHits.clear();
   }
 
@@ -30,14 +32,23 @@ namespace uTOF {
   }
 
   void 
-  Channel::AddHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW) 
+  Channel::addHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW) 
   {
     mHits.push_back(new Hit(aTOT, aDeltaX, aDeltaZ, aDeltaT, aDeltaRAW));
   }
 
-  void 
-  Channel::Clear() 
+  void
+  Channel::addHits(const Channel *aChannel)
   {
+    for (const auto &aHit : aChannel->mHits)
+      mHits.push_back(new Hit(*aHit));
+  }
+  
+  void 
+  Channel::clear() 
+  {
+    for (auto &aHit : mHits)
+      delete aHit;
     mHits.clear();
   }
 
