@@ -36,7 +36,7 @@ namespace uTOF {
   private:
     
     /** members **/ 
-    int      mIndex; //!
+    int      mIndex;
     HitArray mHits;
     
   };
