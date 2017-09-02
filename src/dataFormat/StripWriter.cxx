@@ -57,7 +57,7 @@ namespace uTOF {
     
     /** loop over input tree **/
     long nev = tin->GetEntries();
-    long totalHits = 0;
+    long totalHits = 0, partialHits = 0;
     std::cout << "Start processing input tree: " << nev << " entries found" << std::endl;
     for (int iev = 0; iev < nev; iev += kNumberOfChannels) {
 
@@ -76,15 +76,21 @@ namespace uTOF {
 	
       } /** end of loop over strip channels **/
 
-      std::cout << "Processed strip #" << mStripIndex << " at offset " << stripOffset << ": totalHits = " << totalHits << std::endl;
+      /** partial fill output tree **/
+      if (partialHits > 15724800) {
+	partialHits = 0;
+	std::cout << "Partial fill of \"uTOFstrip\" tree: totalHits = " << totalHits << " (at event #" << iev << ")" << std::endl;
+	for (Int_t ich = 0; ich < kNumberOfStripChannels; ich++) {
+	  channel = channels.at(ich);
+	  tout->Fill();
+	  channel->clear();
+	}
+      }
 
     } /** and of loop over input tree **/
-    std::cout << "Finished processing input tree: " << totalHits << " hits found" << std::endl;
-    
-    /** close input **/
-    fin->Close();
-    
-    /** fill output tree **/
+
+    /** final fill output tree **/
+    std::cout << "Final fill of \"uTOFstrip\" tree: totalHits " << totalHits << std::endl;
     for (Int_t ich = 0; ich < kNumberOfStripChannels; ich++) {
       channel = channels.at(ich);
       tout->Fill();
