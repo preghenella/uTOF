@@ -35,6 +35,13 @@ namespace uTOF {
     mHits.push_back(new Hit(aTOT, aDeltaX, aDeltaZ, aDeltaT, aDeltaRAW));
   }
 
+  void
+  Channel::addHits(const Channel *aChannel)
+  {
+    for (const auto &aHit : aChannel->mHits)
+      mHits.push_back(new Hit(*aHit));
+  }
+  
   void 
   Channel::clear() 
   {
