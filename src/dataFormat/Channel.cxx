@@ -17,6 +17,8 @@ namespace uTOF {
 
   Channel::~Channel()
   {
+    for (auto &aHit : mHits)
+      delete aHit;
     mHits.clear();
   }
 
@@ -45,6 +47,8 @@ namespace uTOF {
   void 
   Channel::clear() 
   {
+    for (auto &aHit : mHits)
+      delete aHit;
     mHits.clear();
   }
 
