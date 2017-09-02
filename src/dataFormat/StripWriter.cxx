@@ -58,7 +58,7 @@ namespace uTOF {
     /** loop over input tree **/
     long nev = tin->GetEntries();
     long totalHits = 0, partialHits = 0;
-    std::cout << "Start processing input tree: " << nev << " entries found" << std::endl;
+    std::cout << "Start processing \"uTOFtree\" for strip #" << mStripIndex << ": " << nev << " entries found" << std::endl;
     for (int iev = 0; iev < nev; iev += kNumberOfChannels) {
 
       /** increment strip offset **/
