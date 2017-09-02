@@ -64,7 +64,7 @@ namespace uTOF {
     
     /** loop over input tree **/
     Long64_t nev = tin->GetEntries();
-    long totHits = 0;
+    long totalHits = 0, partialHits = 0;
     std::cout << "Start processing input tree: " << nev << " entries found" << std::endl;
     for (Int_t iev = 0; iev < nev; iev++) {
       /** get event **/
@@ -76,20 +76,34 @@ namespace uTOF {
 	/** add hit to channel **/
 	channel = channels.at(index[ihit]);
 	channel->AddHit(tot[ihit], deltax[ihit], deltaz[ihit], deltat[ihit], deltaraw[ihit]); 
-	totHits++;
+	partialHits++;
+	totalHits++;
 	
       } /** end of loop over hits **/
+
+      /** partial fill output tree **/
+      if (partialHits > 15724800) {
+	partialHits = 0;
+	std::cout << "Partial fill of \"uTOFtree\" tree: totalHits = " << totalHits << " (at event #" << iev << ")" << std::endl;
+	for (Int_t ich = 0; ich < kNumberOfChannels; ich++) {
+	  channel = channels.at(ich);
+	  tout->Fill();
+	  channel->Clear();
+	}
+      }
+
     } /** and of loop over input tree **/
-    std::cout << "Finished processing input tree: " << totHits << " hits found" << std::endl;
-    
-    /** close input **/
-    fin->Close();
-    
-    /** fill output tree **/
+
+    /** final fill output tree **/
+    std::cout << "Final fill of \"uTOFtree\" tree: totalHits " << totalHits << std::endl;
     for (Int_t ich = 0; ich < kNumberOfChannels; ich++) {
       channel = channels.at(ich);
       tout->Fill();
     }
+    
+    /** close input **/
+    fin->Close();
+    
     
     /** write and close output **/
     tout->Write();
