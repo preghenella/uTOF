@@ -88,7 +88,7 @@ namespace uTOF {
 	for (Int_t ich = 0; ich < kNumberOfChannels; ich++) {
 	  channel = channels.at(ich);
 	  tout->Fill();
-	  channel->Clear();
+	  channel->clear();
 	}
       }
 
