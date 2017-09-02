@@ -75,7 +75,7 @@ namespace uTOF {
 	
 	/** add hit to channel **/
 	channel = channels.at(index[ihit]);
-	channel->AddHit(tot[ihit], deltax[ihit], deltaz[ihit], deltat[ihit], deltaraw[ihit]); 
+	channel->addHit(tot[ihit], deltax[ihit], deltaz[ihit], deltat[ihit], deltaraw[ihit]); 
 	totHits++;
 	
       } /** end of loop over hits **/

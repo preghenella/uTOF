@@ -30,13 +30,13 @@ namespace uTOF {
   }
 
   void 
-  Channel::AddHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW) 
+  Channel::addHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW) 
   {
     mHits.push_back(new Hit(aTOT, aDeltaX, aDeltaZ, aDeltaT, aDeltaRAW));
   }
 
   void 
-  Channel::Clear() 
+  Channel::clear() 
   {
     mHits.clear();
   }

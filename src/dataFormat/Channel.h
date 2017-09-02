@@ -28,8 +28,8 @@ namespace uTOF {
     const Hit *getHit(int iHit) const {return iHit < mHits.size() ? mHits.at(iHit) : NULL;};
 
     /** modifiers **/
-    void AddHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW);
-    void Clear();
+    void addHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW);
+    void clear();
 
   private:
     
