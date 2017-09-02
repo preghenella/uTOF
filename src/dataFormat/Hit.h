@@ -9,7 +9,7 @@ namespace uTOF {
     
     /** constructors **/
     Hit();
-    Hit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW);
+    Hit(int aIndex, float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW);
     Hit(const Hit &rhs);
 
     /** destructors **/
@@ -19,6 +19,7 @@ namespace uTOF {
     Hit &operator=(const Hit &rhs);
 
     /** accessors **/
+    int   getIndex()    const {return mIndex;};
     float getTOT()      const {return mTOT;};
     float getDeltaX()   const {return mDeltaX;};
     float getDeltaZ()   const {return mDeltaZ;};
@@ -27,6 +28,7 @@ namespace uTOF {
 
   private:
     
+    int   mIndex;
     float mTOT;
     float mDeltaX;
     float mDeltaZ;
