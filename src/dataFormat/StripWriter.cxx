@@ -24,6 +24,22 @@ namespace uTOF {
   StripWriter::Process()
   {
     
+    /** create channels **/
+    int stripOffset = mStripIndex * kNumberOfStripChannels;
+    std::vector<Channel *> channels;
+    for (int ich = 0; ich < kNumberOfStripChannels; ich++)
+      channels.push_back(new Channel(stripOffset + ich));
+    
+    /** open output **/
+    TFile *fout = TFile::Open(mOutputFileName.c_str(), "RECREATE");
+    if (!fout || !fout->IsOpen()) {
+      std::cerr << "Cannot open output file: " << mOutputFileName << std::endl;
+      return false;
+    }
+    TTree *tout = new TTree("uTOFstrip", ""); 
+    Channel *channel = channels.at(0);
+    tout->Branch("channel", "uTOF::Channel", &channel); 
+    
     /** open input **/
     TFile *fin = TFile::Open(mInputFileName.c_str());
     if (!fin || !fin->IsOpen()) {
@@ -38,22 +54,6 @@ namespace uTOF {
     std::cout << "Processing input file: " << mInputFileName << std::endl;
     Channel *channelIn = new Channel();
     tin->SetBranchAddress("channel", &channelIn);
-    
-    /** open output **/
-    TFile *fout = TFile::Open(mOutputFileName.c_str(), "RECREATE");
-    if (!fout || !fout->IsOpen()) {
-      std::cerr << "Cannot open output file: " << mOutputFileName << std::endl;
-      return false;
-    }
-    TTree *tout = new TTree("uTOFstrip", ""); 
-    Channel *channel = new Channel();
-    tout->Branch("channel", "uTOF::Channel", &channel); 
-    
-    /** create channels **/
-    int stripOffset = mStripIndex * kNumberOfStripChannels;
-    std::vector<Channel *> channels;
-    for (int ich = 0; ich < kNumberOfStripChannels; ich++)
-      channels.push_back(new Channel(stripOffset + ich));
     
     /** loop over input tree **/
     long nev = tin->GetEntries();
@@ -97,6 +97,7 @@ namespace uTOF {
     }
     
     /** write and close output **/
+    fout->cd();
     tout->Write();
     fout->Close();
     std::cout << "Tree \"uTOFstrip\" successfully written: " << mOutputFileName << std::endl;
