@@ -25,6 +25,21 @@ namespace uTOF {
   Writer::Process()
   {
     
+    /** create channels **/
+    std::vector<Channel *> channels;
+    for (Int_t ich = 0; ich < kNumberOfChannels; ich++)
+      channels.push_back(new Channel(ich));
+    
+    /** open output **/
+    TFile *fout = TFile::Open(mOutputFileName.c_str(), "RECREATE");
+    if (!fout || !fout->IsOpen()) {
+      std::cerr << "Cannot open output file: " << mOutputFileName << std::endl;
+      return false;
+    }
+    TTree *tout = new TTree("uTOFtree", ""); 
+    Channel *channel = channels.at(0);
+    tout->Branch("channel", "uTOF::Channel", &channel); 
+    
     /** open input **/
     TFile *fin = TFile::Open(mInputFileName.c_str());
     if (!fin || !fin->IsOpen()) {
@@ -46,21 +61,6 @@ namespace uTOF {
     tin->SetBranchAddress("deltaz", &deltaz);
     tin->SetBranchAddress("deltat", &deltat);
     tin->SetBranchAddress("deltaraw", &deltaraw);
-    
-    /** open output **/
-    TFile *fout = TFile::Open(mOutputFileName.c_str(), "RECREATE");
-    if (!fout || !fout->IsOpen()) {
-      std::cerr << "Cannot open output file: " << mOutputFileName << std::endl;
-      return false;
-    }
-    TTree *tout = new TTree("uTOFtree", ""); 
-    Channel *channel = new Channel();
-    tout->Branch("channel", "uTOF::Channel", &channel); 
-    
-    /** create channels **/
-    std::vector<Channel *> channels;
-    for (Int_t ich = 0; ich < kNumberOfChannels; ich++)
-      channels.push_back(new Channel(ich));
     
     /** loop over input tree **/
     Long64_t nev = tin->GetEntries();
@@ -106,6 +106,7 @@ namespace uTOF {
     
     
     /** write and close output **/
+    fout->cd();
     tout->Write();
     fout->Close();
     std::cout << "Tree \"uTOFtree\" successfully written: " << mOutputFileName << std::endl;
