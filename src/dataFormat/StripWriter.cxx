@@ -61,14 +61,11 @@ namespace uTOF {
     std::cout << "Start processing \"uTOFtree\" for strip #" << mStripIndex << ": " << nev << " entries found" << std::endl;
     for (int iev = 0; iev < nev; iev += kNumberOfChannels) {
 
-      /** increment strip offset **/
-      stripOffset += iev;
-      
       /** loop over strip channels **/
       for (int ich = 0; ich < kNumberOfStripChannels; ich++) {
 
 	/** get entry **/
-	tin->GetEntry(stripOffset + ich);
+	tin->GetEntry(iev + stripOffset + ich);
 
 	/** add hits to channel **/
 	channels[ich]->addHits(channelIn);
