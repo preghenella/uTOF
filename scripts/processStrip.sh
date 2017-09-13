@@ -12,7 +12,7 @@ if [[ $2 == "" ]]; then
 elif [[ $2 == "false" ]]; then
     makeChain=false
 elif [[ $2 == "true" ]]; then
-    makeChain=true
+    makeChain=false
 else
     echo usage: $0 [strip] [makeChain]
     exit 1
@@ -42,4 +42,4 @@ writeExe=/alistorage/tofcalib/uTOF/bin/uTOFstripWriter
 writeIn=$chainOut
 writeOut=$dirOut/uTOFstrip.$strip.root
 writeLog=$dirLog/uTOFstripWriter.$strip.log
-$writeExe -s $strip -i $writeIn -o $writeOut  &> $writeLog &
+$writeExe -s $strip -i $writeIn -o $writeOut &> $writeLog &
