@@ -2,7 +2,7 @@
 #define uTOF_Hit_H
 
 namespace uTOF {
-
+  
   class Hit {
 
   public:
@@ -25,6 +25,9 @@ namespace uTOF {
     float getDeltaT()   const {return mDeltaT;};
     float getDeltaRAW() const {return mDeltaRAW;};
 
+    /** modifiers **/
+    void setDeltaRAW(float value) {mDeltaRAW = value;};
+    
   private:
     
     float mTOT;
@@ -32,8 +35,8 @@ namespace uTOF {
     float mDeltaZ;
     float mDeltaT;
     float mDeltaRAW;
- 
-  };
+
+  }; /** class Hit **/
 
 } /** namespace uTOF **/
 

@@ -7,7 +7,7 @@ namespace uTOF {
 
   class Hit;
   typedef std::vector<Hit *> HitArray;
-
+  
   class Channel {
     
   public:
@@ -24,9 +24,9 @@ namespace uTOF {
     Channel &operator=(const Channel &rhs);
 
     /** accessors **/
-    int        getIndex()        const {return mIndex;};
-    int        getNumberOfHits() const {return mHits.size();};
-    const Hit *getHit(int iHit)  const {return iHit < mHits.size() ? mHits.at(iHit) : nullptr;};
+    int  getIndex()        const {return mIndex;};
+    int  getNumberOfHits() const {return mHits.size();};
+    Hit *getHit(int iHit)  const {return iHit < mHits.size() ? mHits.at(iHit) : nullptr;};
 
     /** modifiers **/
     void addHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW);
@@ -38,9 +38,9 @@ namespace uTOF {
     /** members **/ 
     int      mIndex;
     HitArray mHits;
-    
-  };
-  
+
+  }; /** class Channel **/
+
 } /** namespace uTOF **/
 
 #endif /** uTOF_Channel_H **/
