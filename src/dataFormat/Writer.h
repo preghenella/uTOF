@@ -32,8 +32,8 @@ namespace uTOF {
     /** members **/
     std::string mInputFileName, mOutputFileName; 
       
-  };
-  
+  }; /** class Writer **/
+
 } /** namespace uTOF **/
 
-#endif /** uTOF_Channel_H **/
+#endif /** uTOF_Writer_H **/

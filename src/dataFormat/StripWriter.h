@@ -33,8 +33,8 @@ namespace uTOF {
     int         mStripIndex;
     std::string mInputFileName, mOutputFileName; 
       
-  };
-  
+  }; /** class StripWriter **/
+
 } /** namespace uTOF **/
 
 #endif /** uTOF_StripWriter_H **/

@@ -8,10 +8,10 @@ set(SOURCES
     )
 
 set(HEADERS
-    Hit.h
-    Channel.h
-    Writer.h
-    StripWriter.h
+    dataFormat/Hit.h
+    dataFormat/Channel.h
+    dataFormat/Writer.h
+    dataFormat/StripWriter.h
     )
 
 uTOF_GENERATE_LIBRARY()

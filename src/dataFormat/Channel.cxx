@@ -1,8 +1,9 @@
-#include "Channel.h"
-#include "Hit.h"
+#include "dataFormat/Channel.h"
+#include "dataFormat/Hit.h"
+#include "TTree.h"
 
 namespace uTOF {
-
+  
   Channel::Channel() :
     mIndex(-1), mHits()
   {}

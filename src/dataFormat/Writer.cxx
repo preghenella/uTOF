@@ -1,6 +1,6 @@
-#include "Writer.h"
-#include "Channel.h"
-#include "Hit.h"
+#include "dataFormat/Writer.h"
+#include "dataFormat/Channel.h"
+#include "dataFormat/Hit.h"
 #include "Rtypes.h"
 #include "TFile.h"
 #include "TTree.h"
@@ -8,7 +8,7 @@
 #include <iostream>
 
 namespace uTOF {
-
+  
   Writer::Writer() :
     mInputFileName(), mOutputFileName()
   {}
@@ -81,7 +81,7 @@ namespace uTOF {
 	
       } /** end of loop over hits **/
 
-      /** partial fill output tree **/
+	/** partial fill output tree **/
       if (partialHits > 15724800) {
 	partialHits = 0;
 	std::cout << "Partial fill of \"uTOFtree\" tree: totalHits = " << totalHits << " (at event #" << iev << ")" << std::endl;
@@ -94,7 +94,7 @@ namespace uTOF {
 
     } /** and of loop over input tree **/
 
-    /** final fill output tree **/
+      /** final fill output tree **/
     std::cout << "Final fill of \"uTOFtree\" tree: totalHits " << totalHits << std::endl;
     for (Int_t ich = 0; ich < kNumberOfChannels; ich++) {
       channel = channels.at(ich);
@@ -114,5 +114,5 @@ namespace uTOF {
     /** success **/
     return true;
   }
-  
+
 } /** namespace uTOF **/

@@ -1,13 +1,13 @@
-#include "StripWriter.h"
-#include "Channel.h"
-#include "Hit.h"
+#include "dataFormat/StripWriter.h"
+#include "dataFormat/Channel.h"
+#include "dataFormat/Hit.h"
 #include "TFile.h"
 #include "TTree.h"
 #include <vector>
 #include <iostream>
 
 namespace uTOF {
-
+  
   StripWriter::StripWriter() :
     mInputFileName(), mOutputFileName()
   {}
@@ -73,7 +73,7 @@ namespace uTOF {
 	
       } /** end of loop over strip channels **/
 
-      /** partial fill output tree **/
+	/** partial fill output tree **/
       if (partialHits > 15724800) {
 	partialHits = 0;
 	std::cout << "Partial fill of \"uTOFstrip\" tree: totalHits = " << totalHits << " (at event #" << iev << ")" << std::endl;
@@ -86,7 +86,7 @@ namespace uTOF {
 
     } /** and of loop over input tree **/
 
-    /** final fill output tree **/
+      /** final fill output tree **/
     std::cout << "Final fill of \"uTOFstrip\" tree: totalHits " << totalHits << std::endl;
     for (Int_t ich = 0; ich < kNumberOfStripChannels; ich++) {
       channel = channels.at(ich);
@@ -102,5 +102,5 @@ namespace uTOF {
     /** success **/
     return true;
   }
-  
+
 } /** namespace uTOF **/
