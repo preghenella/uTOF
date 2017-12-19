@@ -7,9 +7,20 @@ namespace uTOF {
 
   public:
     
+    /** flag enumerator **/
+    enum EFlag_t {
+      kMultiple     = 0x01,
+      kAdjacentX    = 0x02,
+      kAdjacentZ    = 0x04,
+      kPrimary      = 0x08,
+      kGoodClusters = 0x10,
+      kGoodChi2     = 0x20,
+      kGoodT0       = 0x40
+    };
+    
     /** constructors **/
     Hit();
-    Hit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW);
+    Hit(float aMomentum, unsigned char aFlag, float aTOT, float aDeltaX, float aDeltaZ, float aDeltaRAW);
     Hit(const Hit &rhs);
 
     /** destructors **/
@@ -19,22 +30,27 @@ namespace uTOF {
     Hit &operator=(const Hit &rhs);
 
     /** accessors **/
-    float getTOT()      const {return mTOT;};
-    float getDeltaX()   const {return mDeltaX;};
-    float getDeltaZ()   const {return mDeltaZ;};
-    float getDeltaT()   const {return mDeltaT;};
-    float getDeltaRAW() const {return mDeltaRAW;};
+    float         getMomentum() const {return mMomentum;};
+    unsigned char getFlag()     const {return mFlag;};
+    float         getTOT()      const {return mTOT;};
+    float         getDeltaX()   const {return mDeltaX;};
+    float         getDeltaZ()   const {return mDeltaZ;};
+    float         getDeltaRAW() const {return mDeltaRAW;};
 
+    /** methods **/
+    bool isFlag(EFlag_t aFlag) const {return (mFlag && aFlag) == aFlag;};
+    
     /** modifiers **/
     void setDeltaRAW(float value) {mDeltaRAW = value;};
-    
+
   private:
     
-    float mTOT;
-    float mDeltaX;
-    float mDeltaZ;
-    float mDeltaT;
-    float mDeltaRAW;
+    float         mMomentum;
+    unsigned char mFlag;
+    float         mTOT;
+    float         mDeltaX;
+    float         mDeltaZ;
+    float         mDeltaRAW;
 
   }; /** class Hit **/
 

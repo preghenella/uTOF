@@ -3,26 +3,29 @@
 namespace uTOF {
   
   Hit::Hit() : 
+    mMomentum(0.),
+    mFlag(0x0),
     mTOT(0.), 
     mDeltaX(0.), 
     mDeltaZ(0.), 
-    mDeltaT(0.), 
     mDeltaRAW(0.) 
   {}
  
-  Hit::Hit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW) :
+  Hit::Hit(float aMomentum, unsigned char aFlag, float aTOT, float aDeltaX, float aDeltaZ, float aDeltaRAW) :
+    mMomentum(aMomentum),
+    mFlag(aFlag),
     mTOT(aTOT), 
     mDeltaX(aDeltaX), 
     mDeltaZ(aDeltaZ), 
-    mDeltaT(aDeltaT), 
     mDeltaRAW(aDeltaRAW) 
   {}
 
   Hit::Hit(const Hit &rhs) :
+    mMomentum(rhs.mMomentum),
+    mFlag(rhs.mFlag),
     mTOT(rhs.mTOT), 
     mDeltaX(rhs.mDeltaX), 
     mDeltaZ(rhs.mDeltaZ), 
-    mDeltaT(rhs.mDeltaT), 
     mDeltaRAW(rhs.mDeltaRAW)
   {}
 
@@ -33,10 +36,11 @@ namespace uTOF {
   Hit::operator=(const Hit &rhs)
   {
     if (&rhs == this) return *this;
+    mMomentum = rhs.mMomentum;
+    mFlag = rhs.mFlag;
     mTOT = rhs.mTOT;
     mDeltaX = rhs.mDeltaX;
     mDeltaZ = rhs.mDeltaZ;
-    mDeltaT = rhs.mDeltaT;
     mDeltaRAW = rhs.mDeltaRAW;
     return *this;
   }

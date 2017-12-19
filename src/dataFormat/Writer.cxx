@@ -53,13 +53,15 @@ namespace uTOF {
     }
     std::cout << "Processing input file: " << mInputFileName << std::endl;
     Int_t nhits, index[kMaxHits];
-    Float_t tot[kMaxHits], deltax[kMaxHits], deltaz[kMaxHits], deltat[kMaxHits], deltaraw[kMaxHits];
+    UChar_t flag[kMaxHits];
+    Float_t momentum[kMaxHits], tot[kMaxHits], deltax[kMaxHits], deltaz[kMaxHits], deltaraw[kMaxHits];
     tin->SetBranchAddress("nhits", &nhits);
     tin->SetBranchAddress("index", &index);
+    tin->SetBranchAddress("momentum", &momentum);
+    tin->SetBranchAddress("flag", &flag);
     tin->SetBranchAddress("tot", &tot);
     tin->SetBranchAddress("deltax", &deltax);
     tin->SetBranchAddress("deltaz", &deltaz);
-    tin->SetBranchAddress("deltat", &deltat);
     tin->SetBranchAddress("deltaraw", &deltaraw);
     
     /** loop over input tree **/
@@ -75,7 +77,7 @@ namespace uTOF {
 	
 	/** add hit to channel **/
 	channel = channels.at(index[ihit]);
-	channel->addHit(tot[ihit], deltax[ihit], deltaz[ihit], deltat[ihit], deltaraw[ihit]); 
+	channel->addHit(momentum[ihit], flag[ihit], tot[ihit], deltax[ihit], deltaz[ihit], deltaraw[ihit]); 
 	partialHits++;
 	totalHits++;
 	

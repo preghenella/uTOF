@@ -33,9 +33,9 @@ namespace uTOF {
   }
 
   void 
-  Channel::addHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW) 
+  Channel::addHit(float aMomentum, unsigned char aFlag, float aTOT, float aDeltaX, float aDeltaZ, float aDeltaRAW) 
   {
-    mHits.push_back(new Hit(aTOT, aDeltaX, aDeltaZ, aDeltaT, aDeltaRAW));
+    mHits.push_back(new Hit(aMomentum, aFlag, aTOT, aDeltaX, aDeltaZ, aDeltaRAW));
   }
 
   void

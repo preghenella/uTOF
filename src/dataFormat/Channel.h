@@ -29,7 +29,7 @@ namespace uTOF {
     Hit *getHit(int iHit)  const {return iHit < mHits.size() ? mHits.at(iHit) : nullptr;};
 
     /** modifiers **/
-    void addHit(float aTOT, float aDeltaX, float aDeltaZ, float aDeltaT, float aDeltaRAW);
+    void addHit(float aMomentum, unsigned char aFlag, float aTOT, float aDeltaX, float aDeltaZ, float aDeltaRAW);
     void addHits(const Channel *aChannel);
     void clear();
 
